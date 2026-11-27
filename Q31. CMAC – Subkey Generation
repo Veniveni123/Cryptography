@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    unsigned char k1,k2;
+
+    printf("Enter first subkey value (0-255): ");
+    scanf("%hhu",&k1);
+
+    k2=k1<<1;
+
+    if(k1&0x80)
+        k2^=0x1B;
+
+    printf("Second subkey = %02X\n",k2);
+
+    printf("\nCMAC reduction constants:\n");
+    printf("64-bit block = 0x1B\n");
+    printf("128-bit block = 0x87\n");
+
+    return 0;
+}
