@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main() {
+    int message=25;
+    int k1=7,k2=11;
+    int r1,s1,r2,s2;
+
+    r1=(message*k1)%97;
+    s1=(message+k1)%97;
+
+    r2=(message*k2)%97;
+    s2=(message+k2)%97;
+
+    printf("Message = %d\n",message);
+
+    printf("\nFirst DSA signature:\n");
+    printf("r = %d, s = %d\n",r1,s1);
+
+    printf("\nSecond DSA signature:\n");
+    printf("r = %d, s = %d\n",r2,s2);
+
+    printf("\nDifferent nonce values produce different ");
+    printf("signatures.\n");
+
+    printf("RSA deterministic signatures produce the same ");
+    printf("signature for the same message and key.\n");
+
+    return 0;
+}
