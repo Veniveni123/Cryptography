@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main() {
+    int p[4], c[4], iv, key, prev;
+    int i;
+
+    printf("Enter 4 plaintext blocks (0-255):\n");
+
+    for(i=0;i<4;i++)
+        scanf("%d",&p[i]);
+
+    printf("Enter key and IV: ");
+    scanf("%d%d",&key,&iv);
+
+    prev=iv;
+
+    printf("\nCBC Encrypted blocks:\n");
+
+    for(i=0;i<4;i++) {
+        c[i]=(p[i]^prev)^key;
+        printf("%d ",c[i]);
+        prev=c[i];
+    }
+
+    printf("\n\nSecurity: 3DES is stronger than DES.\n");
+    printf("Performance: 3DES is slower than DES.\n");
+
+    return 0;
+}
