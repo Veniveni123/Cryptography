@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char text[1000];
+    char freq[]="ETAOINSHRDLCUMWFGYPBVKJXQZ";
+    int count[26]={0};
+    int i,j;
+
+    printf("Enter ciphertext:\n");
+    fgets(text,sizeof(text),stdin);
+
+    for(i=0;text[i];i++)
+        if(isalpha(text[i]))
+            count[toupper(text[i])-'A']++;
+
+    printf("\nLetter frequencies:\n");
+
+    for(i=0;i<26;i++)
+        printf("%c = %d\n",'A'+i,count[i]);
+
+    printf("\nApproximate plaintext:\n");
+
+    for(i=0;text[i];i++) {
+        if(isalpha(text[i])) {
+            int x=toupper(text[i])-'A';
+
+            for(j=0;j<26;j++)
+                if(count[x]>count[j])
+                    break;
+
+            putchar(freq[x]);
+        }
+        else
+            putchar(text[i]);
+    }
+
+    return 0;
+}
