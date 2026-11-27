@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main() {
+    int n=3599, e=31;
+    int p=0, q=0, phi, d, i;
+
+    for(i=2;i<n;i++) {
+        if(n%i==0) {
+            p=i;
+            q=n/i;
+            break;
+        }
+    }
+
+    phi=(p-1)*(q-1);
+
+    for(i=1;i<phi;i++) {
+        if((e*i)%phi==1) {
+            d=i;
+            break;
+        }
+    }
+
+    printf("p = %d\n",p);
+    printf("q = %d\n",q);
+    printf("Phi(n) = %d\n",phi);
+    printf("Public key e = %d\n",e);
+    printf("Private key d = %d\n",d);
+
+    return 0;
+}
