@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    int state=1600;
+    int rate=1024;
+    int capacity=state-rate;
+    int lane=64;
+
+    printf("SHA-3 Lane Analysis\n");
+
+    printf("Total state bits = %d\n",state);
+    printf("Rate bits = %d\n",rate);
+    printf("Capacity bits = %d\n",capacity);
+
+    printf("Total lanes = %d\n",state/lane);
+    printf("Rate lanes = %d\n",rate/lane);
+    printf("Capacity lanes = %d\n",capacity/lane);
+
+    printf("\nZero capacity lanes = %d\n",capacity/lane);
+
+    printf("Ignoring permutation, capacity lanes ");
+    printf("remain zero indefinitely.\n");
+
+    return 0;
+}
