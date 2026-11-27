@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main() {
+    int p[3], c[3], d[3];
+    int key=29, counter=0, i;
+
+    printf("Enter three plaintext blocks (0-255):\n");
+
+    for(i=0;i<3;i++)
+        scanf("%d",&p[i]);
+
+    printf("\nEncrypted blocks:\n");
+
+    for(i=0;i<3;i++) {
+        c[i]=p[i]^(counter^key);
+        printf("%02X ",c[i]);
+        counter++;
+    }
+
+    counter=0;
+
+    printf("\nDecrypted blocks:\n");
+
+    for(i=0;i<3;i++) {
+        d[i]=c[i]^(counter^key);
+        printf("%02X ",d[i]);
+        counter++;
+    }
+
+    return 0;
+}
