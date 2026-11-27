@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int main() {
+    int key=15;
+    int X,T,Y,first,second;
+
+    printf("Enter one-block message X: ");
+    scanf("%d",&X);
+
+    T=X^key;
+
+    Y=X^T;
+
+    first=X^key;
+    second=(Y^first)^key;
+
+    printf("MAC of one block = %d\n",T);
+    printf("Second block X XOR T = %d\n",Y);
+    printf("MAC of two-block message = %d\n",second);
+
+    printf("\nBoth MAC values are equal.\n");
+
+    return 0;
+}
