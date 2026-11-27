@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char text[1000];
+    char english[]="ETAOINSHRDLCUMWFGYPBVKJXQZ";
+    int count[26]={0},order[26];
+    int i,j,temp;
+
+    printf("Enter ciphertext:\n");
+    fgets(text,sizeof(text),stdin);
+
+    for(i=0;text[i];i++)
+        if(isalpha(text[i]))
+            count[toupper(text[i])-'A']++;
+
+    for(i=0;i<26;i++)
+        order[i]=i;
+
+    for(i=0;i<25;i++) {
+        for(j=i+1;j<26;j++) {
+            if(count[order[j]]>count[order[i]]) {
+                temp=order[i];
+                order[i]=order[j];
+                order[j]=temp;
+            }
+        }
+    }
+
+    printf("\nFrequency-based decrypted text:\n");
+
+    for(i=0;text[i];i++) {
+        if(isalpha(text[i])) {
+            int x=toupper(text[i])-'A';
+            char ch=english[0];
+
+            for(j=0;j<26;j++)
+                if(order[j]==x) {
+                    ch=english[j];
+                    break;
+                }
+
+            if(islower(text[i]))
+                ch=tolower(ch);
+
+            putchar(ch);
+        }
+        else
+            putchar(text[i]);
+    }
+
+    return 0;
+}
