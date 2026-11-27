@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+long long power(int a,int b,int n) {
+    long long result=1;
+
+    while(b>0) {
+        if(b%2)
+            result=(result*a)%n;
+
+        a=(a*a)%n;
+        b/=2;
+    }
+
+    return result;
+}
+
+int main() {
+    int e,n,c,i;
+
+    printf("Enter public key e and n: ");
+    scanf("%d%d",&e,&n);
+
+    printf("Enter encrypted character block: ");
+    scanf("%d",&c);
+
+    for(i=0;i<26;i++) {
+        if(power(i,e,n)==c) {
+            printf("Recovered plaintext: %c\n",i+'A');
+            return 0;
+        }
+    }
+
+    printf("No matching alphabetic character found.");
+
+    return 0;
+}
