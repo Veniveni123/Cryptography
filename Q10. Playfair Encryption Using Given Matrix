@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+char m[5][5] = {
+    {'M','F','H','I','K'},
+    {'U','N','O','P','Q'},
+    {'Z','V','W','X','Y'},
+    {'E','L','A','R','G'},
+    {'D','S','T','B','C'}
+};
+
+int main() {
+    char text[200], temp[200];
+    int i, j, k=0, r1,c1,r2,c2;
+
+    printf("Enter plaintext: ");
+    fgets(text, sizeof(text), stdin);
+
+    for (i=0; text[i]; i++) {
+        if (isalpha(text[i])) {
+            char ch = toupper(text[i]);
+
+            if (ch == 'J') ch = 'I';
+
+            temp[k++] = ch;
+        }
+    }
+
+    temp[k] = '\0';
+
+    k = 0;
+
+    for (i=0; temp[i]; i++) {
+        temp[k++] = temp[i];
+
+        if (temp[i+1] && temp[i] == temp[i+1])
+            temp[k++] = 'X';
+    }
+
+    if (k % 2)
+        temp[k++] = 'X';
+
+    temp[k] = '\0';
+
+    printf("Encrypted text: ");
+
+    for (i=0; i<k; i+=2) {
+        for (r1=0; r1<5; r1++)
+            for (c1=0; c1<5; c1++)
+                if (m[r1][c1] == temp[i]) goto first;
+
+        first:
+
+        for (r2=0; r2<5; r2++)
+            for (c2=0; c2<5; c2++)
+                if (m[r2][c2] == temp[i+1]) goto second;
+
+        second:
+
+        if (r1 == r2) {
+            putchar(m[r1][(c1+1)%5]);
+            putchar(m[r2][(c2+1)%5]);
+        }
+        else if (c1 == c2) {
+            putchar(m[(r1+1)%5][c1]);
+            putchar(m[(r2+1)%5][c2]);
+        }
+        else {
+            putchar(m[r1][c2]);
+            putchar(m[r2][c1]);
+        }
+    }
+
+    return 0;
+}
