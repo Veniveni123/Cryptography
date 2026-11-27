@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <string.h>
+
+int gcd(int a, int b) {
+    while (b) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+int inverse(int a) {
+    int i;
+    for (i = 1; i < 26; i++)
+        if ((a * i) % 26 == 1)
+            return i;
+    return -1;
+}
+
+int main() {
+    char text[500];
+    int a, b, i, p, inv;
+
+    printf("Enter ciphertext: ");
+    fgets(text, sizeof(text), stdin);
+
+    printf("\nPossible plaintexts:\n");
+
+    for (a = 1; a < 26; a++) {
+        if (gcd(a, 26) == 1) {
+            inv = inverse(a);
+
+            for (b = 0; b < 26; b++) {
+                printf("\na=%d b=%d: ", a, b);
+
+                for (i = 0; text[i]; i++) {
+                    if (text[i] >= 'A' && text[i] <= 'Z') {
+                        p = inv * (text[i] - 'A' - b + 26);
+                        putchar((p % 26) + 'A');
+                    }
+                    else if (text[i] >= 'a' && text[i] <= 'z') {
+                        p = inv * (text[i] - 'a' - b + 26);
+                        putchar((p % 26) + 'a');
+                    }
+                    else putchar(text[i]);
+                }
+            }
+        }
+    }
+
+    return 0;
+}
