@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main() {
+    printf("ECB and CBC Error Analysis\n");
+
+    printf("\n1. Error in transmitted C1:\n");
+    printf("ECB: Only P1 is affected.\n");
+    printf("CBC: P1 is corrupted and corresponding bits in P2 are flipped.\n");
+    printf("Blocks after P2 are not affected.\n");
+
+    printf("\n2. Error in source plaintext P1:\n");
+    printf("CBC: Error affects C1 and all subsequent ciphertext blocks.\n");
+    printf("Receiver: P1 is corrupted; subsequent plaintext blocks are also affected.\n");
+
+    return 0;
+}
