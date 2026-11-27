@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+int main() {
+    int key[56], left[28], right[28];
+    int i, round, shift;
+    int schedule[16]={1,1,2,2,2,2,2,2,
+                      1,2,2,2,2,2,2,1};
+
+    printf("Enter 56-bit key (0 or 1):\n");
+
+    for(i=0;i<56;i++)
+        scanf("%d",&key[i]);
+
+    for(i=0;i<28;i++) {
+        left[i]=key[i];
+        right[i]=key[i+28];
+    }
+
+    for(round=0;round<16;round++) {
+        shift=schedule[round];
+
+        while(shift--) {
+            int temp=left[0];
+
+            for(i=0;i<27;i++)
+                left[i]=left[i+1];
+
+            left[27]=temp;
+
+            temp=right[0];
+
+            for(i=0;i<27;i++)
+                right[i]=right[i+1];
+
+            right[27]=temp;
+        }
+
+        printf("\nRound %d subkey (48 bits):\n",round+1);
+
+        for(i=0;i<24;i++)
+            printf("%d",left[i]);
+
+        for(i=0;i<24;i++)
+            printf("%d",right[i]);
+
+        printf("\n");
+    }
+
+    return 0;
+}
