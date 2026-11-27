@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int i;
+    long double keys = 1;
+
+    for (i = 1; i <= 25; i++)
+        keys *= i;
+
+    printf("Total possible keys = 25!\n");
+    printf("Approximate keys = 2^83.68\n");
+
+    printf("Effectively unique keys = 25!/25\n");
+    printf("Approximate unique keys = 2^79.04\n");
+
+    return 0;
+}
