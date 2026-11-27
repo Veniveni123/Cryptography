@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main() {
+    printf("RSA Private Key Leakage Analysis\n");
+
+    printf("\nBob's original modulus is reused.\n");
+    printf("His old private key has been leaked.\n");
+
+    printf("\nGenerating a new public and private key ");
+    printf("with the same modulus is NOT safe.\n");
+
+    printf("The attacker may recover the factors of n ");
+    printf("using the leaked private key.\n");
+
+    printf("Bob must generate a completely new RSA key pair ");
+    printf("with a new modulus.\n");
+
+    return 0;
+}
