@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char text[100], padded[120];
+    int i, n, block=8, j=0;
+
+    printf("Enter plaintext: ");
+    fgets(text,sizeof(text),stdin);
+
+    n=strlen(text);
+
+    if(n>0 && text[n-1]=='\n')
+        n--;
+
+    for(i=0;i<n;i++)
+        padded[j++]=text[i];
+
+    padded[j++]='1';
+
+    while(j%block!=0)
+        padded[j++]='0';
+
+    padded[j]='\0';
+
+    printf("Padded message: %s\n",padded);
+    printf("Total length: %d\n",j);
+
+    printf("Padding is used to identify the original message length ");
+    printf("and distinguish messages with different trailing zeros.");
+
+    return 0;
+}
